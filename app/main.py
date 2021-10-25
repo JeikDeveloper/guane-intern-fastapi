@@ -235,20 +235,18 @@ def api_user_create(
     db: Session = Depends(get_db)
 ):
     """
-    Obtener Listado
+    Crear usuario
     
-    Muestra los perros que han sido registrados en la DB
+    Crear un usuario apartir de cirta información, el manejo de uno a muchos se maneja directamente desde dog
 
     Parametros:
         - Request body parameter
             - Valores de la DB
 
     Retorna un JSON con los datos ingresados en la base de datos como:
-        - ID: int
-        - name: String
-        - Picture: String
-        - is_adopted: Boolean
-        - Created_date: Datetime
+        - name = str,
+        - last_name = str,
+        - email = str,
     """
 
     register = models.User(
@@ -272,18 +270,18 @@ def api_user_read(db:Session=Depends(get_db)):
     """
     Obtener Listado
     
-    Muestra los perros que han sido registrados en la DB
+    Mostrar listado de los usuarios registrados en la BD
 
     Parametros:
         - Request body parameter
             - Valores de la DB
 
-    Retorna un JSON con los datos ingresados en la base de datos como:
-        - ID: int
-        - name: String
-        - Picture: String
-        - is_adopted: Boolean
-        - Created_date: Datetime
+    Retorna un archivo JSON con los usuarios registrados mostrando los siguientes datos
+        - id
+        - name
+        - last_name
+        - email
+        - dogs
     """
     registration = db.query(models.User).all()
     return registration
@@ -299,18 +297,19 @@ def api_user_a_read(id: int, db: Session = Depends(get_db)):
     """
     Obtener Listado
     
-    Muestra los perros que han sido registrados en la DB
+    Mostrar un usuario 
 
     Parametros:
         - Request body parameter
             - Valores de la DB
+            - ID
 
-    Retorna un JSON con los datos ingresados en la base de datos como:
-        - ID: int
-        - name: String
-        - Picture: String
-        - is_adopted: Boolean
-        - Created_date: Datetime
+    Retorna un archivo JSON con el usuario registrado con el ID ingresado, mostrando los siguientes datos
+        - id
+        - name
+        - last_name
+        - email
+        - dogs
     """
     db_user = db.query(models.User).filter(models.User.id == id).first()
     if db_user is None:
@@ -330,20 +329,16 @@ def api_user_update(
     db:Session=Depends(get_db)
 ):
     """
-    Obtener Listado
+    Actualizar Usuario
     
-    Muestra los perros que han sido registrados en la DB
+    Actualizar los datos ingresados de un usuario
 
     Parametros:
         - Request body parameter
             - Valores de la DB
+            - ID
 
-    Retorna un JSON con los datos ingresados en la base de datos como:
-        - ID: int
-        - name: String
-        - Picture: String
-        - is_adopted: Boolean
-        - Created_date: Datetime
+    Retorna el valor de la nueva informacion de la DB
     """
     update = db.query(models.User).filter(models.User.id == id).first()
     if update is None:
@@ -367,20 +362,15 @@ def api_user_delete(
     db:Session=Depends(get_db)
 ):
     """
-    Obtener Listado
+    Eliminar Usuario
     
-    Muestra los perros que han sido registrados en la DB
+    Eliminar un usuario creado anteriormente
 
     Parametros:
         - Request body parameter
-            - Valores de la DB
+            - ID
 
-    Retorna un JSON con los datos ingresados en la base de datos como:
-        - ID: int
-        - name: String
-        - Picture: String
-        - is_adopted: Boolean
-        - Created_date: Datetime
+    Retorna mensaje de aprobación de la solicitud enviada
     """
     delete_user = db.query(models.Dogs).filter(models.User.id == id).first()
     if delete_user is None:

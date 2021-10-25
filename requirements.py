@@ -2,7 +2,6 @@ anyio==3.3.4
 asgiref==3.4.1
 click==8.0.3
 dnspython==2.1.0
-email-validator==1.1.3
 fastapi==0.70.0
 greenlet==1.1.2
 h11==0.12.0
