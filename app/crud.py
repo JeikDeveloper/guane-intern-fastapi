@@ -1,7 +1,0 @@
-# Python
-
-# FastAPI
-
-# Dogs
-
-# User
